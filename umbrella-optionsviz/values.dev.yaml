@@ -8,7 +8,7 @@ tsa:  # Ajoutez ce niveau pour correspondre au nom du subchart
   environment: dev
   replicas: 1
   containers:
-    image: ghcr.io/miletocarmelo/optionsviz
+    image: ghcr.io/hugogobbi/optionsviz
     name: optionsviz
     tags: latest
     ports:
