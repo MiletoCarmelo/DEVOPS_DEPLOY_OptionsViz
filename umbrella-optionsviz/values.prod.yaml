@@ -1,0 +1,37 @@
+
+optionviz:  # Ajoutez ce niveau pour correspondre au nom du subchart
+  module: optionviz
+  environment: prod
+  replicas: 1
+  containers:
+    image: ghcr.io/miletocarmelo/optionviz
+    name: optionviz
+    tags: latest
+    ports:
+      containerPort: 80 # Changed from 'http' to '80' for consistency
+    resources:
+      requests:
+        memory: "1Gi"        # Augmenté de 512Mi à 1Gi
+        cpu: "500m"          # Augmenté de 200m à 500m
+      limits:
+        memory: "2Gi"        # Augmenté de 1024Mi à 2Gi
+        cpu: "1000m"         # Augmenté de 200m à 1000m (équivalent à 1 CPU)
+    sqlite:
+      enabled: false
+    redis:
+      enabled: false
+  service:
+    port: 80
+    targetPort: 80
+  ingress:
+    host: mm.ch  # Moved this out of 'hosts' array for simplicity
+    enabled: true  # Changed from 'enable' to 'enabled' for consistency
+    metadata:
+      annotations:
+        kubernetes.io/ingress.class: nginx  # Added this common annotation
+        nginx.ingress.kubernetes.io/rewrite-target: /$1  # Changed from pathRewrite
+    spec:
+      path: /optionviz
+      pathType: Prefix
+  configmap:
+    enabled: false
