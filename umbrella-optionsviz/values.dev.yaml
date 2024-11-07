@@ -12,7 +12,7 @@ optionsviz:  # Ajoutez ce niveau pour correspondre au nom du subchart
     name: optionsviz
     tags: latest
     imagePullSecrets:
-      - name: technical-secret
+      name: technical-secret
     ports:
       containerPort: 80 # Changed from 'http' to '80' for consistency
     resources:
