@@ -24,7 +24,7 @@ version: 0.1.0
 appVersion: "1.1.0"
 
 dependencies:
-  - name: generic-python-frontend
+  - name: generic-react-frontend
     version: 0.1.0
     repository: https://raw.githubusercontent.com/MiletoCarmelo/DEVOPS_HELM_generic_react_frontend/github-pages
-    alias: tsa
+    alias: optionsviz
