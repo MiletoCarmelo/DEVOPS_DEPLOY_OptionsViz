@@ -1,4 +1,4 @@
-optionsviz:  # Ajoutez ce niveau pour correspondre au nom du subchart
+optionsviz:
   module: optionviz
   name: optionviz
   environment: dev
@@ -10,28 +10,28 @@ optionsviz:  # Ajoutez ce niveau pour correspondre au nom du subchart
     imagePullSecrets:
       name: technical-secret
     ports:
-      containerPort: 80 # Changed from 'http' to '80' for consistency
+      containerPort: 80
     resources:
       requests:
-        memory: "1Gi"        # Augmenté de 512Mi à 1Gi
-        cpu: "1000m"          # Augmenté de 200m à 500m
+        memory: "256Mi"    # Réduit de 1Gi
+        cpu: "200m"        # Réduit de 1000m
       limits:
-        memory: "2Gi"        # Augmenté de 1024Mi à 2Gi
-        cpu: "1000m"         # Augmenté de 200m à 1000m (équivalent à 1 CPU)
-    sqlite:
-      enabled: false
-    redis:
-      enabled: false
+        memory: "512Mi"    # Réduit de 2Gi
+        cpu: "400m"        # Réduit de 1000m
+  sqlite:
+    enabled: false
+  redis:
+    enabled: false
   service:
     port: 80
     targetPort: 80
   ingress:
-    host: mm.ch  
-    enabled: true 
+    host: mm.ch
+    enabled: true
     metadata:
       annotations:
-        kubernetes.io/ingress.class: nginx  # Added this common annotation
-        nginx.ingress.kubernetes.io/rewrite-target: /$1  # If you want path rewriting
+        kubernetes.io/ingress.class: nginx
+        nginx.ingress.kubernetes.io/rewrite-target: /$1
     spec:
       path: /optionviz
       pathType: Prefix
