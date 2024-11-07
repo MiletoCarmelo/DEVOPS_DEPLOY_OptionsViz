@@ -14,7 +14,7 @@ optionsviz:  # Ajoutez ce niveau pour correspondre au nom du subchart
     resources:
       requests:
         memory: "1Gi"        # Augmenté de 512Mi à 1Gi
-        cpu: "500m"          # Augmenté de 200m à 500m
+        cpu: "1000m"          # Augmenté de 200m à 500m
       limits:
         memory: "2Gi"        # Augmenté de 1024Mi à 2Gi
         cpu: "1000m"         # Augmenté de 200m à 1000m (équivalent à 1 CPU)
