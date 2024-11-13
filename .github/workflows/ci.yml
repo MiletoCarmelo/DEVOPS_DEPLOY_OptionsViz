@@ -44,6 +44,9 @@ jobs:
         with:
           ref: ${{ env.BRANCH_PAGES }}
 
+      - name: unzip tgz file
+        run: tar -xvf ${{ env.CHART_DIR }}/${{ env.REPO_NAME }}-*.tgz -C ${{ env.DIR }}
+        
       - name: cd in the folder
         run: cd ${{ env.DIR }}
 

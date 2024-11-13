@@ -1,5 +1,5 @@
 apiVersion: v2
-name: tradings-trategy-analysis
+name: optionsviz
 description: A Helm chart for TradingStrategyAnalysis frontend application
 
 # A chart can be either an 'application' or a 'library' chart.
