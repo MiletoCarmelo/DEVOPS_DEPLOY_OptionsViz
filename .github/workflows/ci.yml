@@ -49,8 +49,11 @@ jobs:
       - name: unzip tgz file
         run: tar -xvf ${{ env.FILE }}-${{ env.VERSION }}.tgz
 
-      - name: cd in the folder
-        run: cd ${{ env.FILE }}
+      - name: mv all from  
+        run: mv ${{ env.FILE }}/* . 
+
+      - name: rm *.tgz
+        run: rm -rf ${{ env.FILE }}-${{ env.VERSION }}.tgz
 
       - name: install helm command
         run: |
