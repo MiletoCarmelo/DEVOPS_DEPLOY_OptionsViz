@@ -8,9 +8,11 @@ env:
   BRANCH_PAGES: github-pages
   BRANCH: prod
   REPO_DEP: https://raw.githubusercontent.com/MiletoCarmelo/DEVOPS_HELM_generic_react_frontend/github-pages
-  DIR: umbrella-optionsviz
+  FILE: optionsviz
+  VERSION: 0.1.0
   REPO_NAME: generic-react-frontend
   VALUES_FILE: values.dev.yaml
+
 
 permissions:
   contents: write
@@ -32,7 +34,7 @@ jobs:
           charts_dir: .  # Point vers le répertoire racine
           charts_url: https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH_PAGES }}
           branch: ${{ env.BRANCH_PAGES }}
-          target_dir: ${{ env.CHART_DIR }}
+          target_dir: .
           linting: false
 
   generate-manifests:
@@ -45,10 +47,10 @@ jobs:
           ref: ${{ env.BRANCH_PAGES }}
 
       - name: unzip tgz file
-        run: tar -xvf ${{ env.CHART_DIR }}/${{ env.REPO_NAME }}-*.tgz -C ${{ env.DIR }}
-        
+        run: tar -xvf ${{ env.FILE }}-${{ env.VERSION }}.tgz
+
       - name: cd in the folder
-        run: cd ${{ env.DIR }}
+        run: cd ${{ env.FILE }}-${{ .env.VERSION }}
 
       - name: helm add repo
         run: helm repo add ${{ env.REPO_NAME }} ${{ env.REPO_DEP }}
