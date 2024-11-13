@@ -58,7 +58,7 @@ jobs:
           chmod 700 get_helm.sh
           ./get_helm.sh
 
-      - name: helm update repo
+      - name: build dependencies
         run: helm dependency build
 
       - name: helm template
