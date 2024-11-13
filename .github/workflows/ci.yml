@@ -1,8 +1,7 @@
 name: CI
-
 on:
   push:
-    branches: 
+    branches:
       - prod
 
 env:
@@ -15,7 +14,7 @@ env:
 
 permissions:
   contents: write
-  packages: write  # Allows pushing images to the GitHub Container Registry
+  packages: write
 
 jobs:
   release-chart:
@@ -26,32 +25,43 @@ jobs:
         with:
           ref: ${{ env.BRANCH_PAGES }}
 
-      - name: rm -rf all 
-        run: rm -rf *
+      - name: Publish Helm chart
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          charts_dir: ..
+          branch: ${{ env.BRANCH_PAGES }}
+          charts_url: https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH_PAGES }}
+          linting: false
 
-      - name: Fetch prod branch
-        run: |
-          git fetch origin prod:prod
-    
-      - name: Merge prod
+  generate-manifests:
+    needs: [release-chart]  # Spécifie que ce job doit attendre que release-chart soit terminé
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout prod branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BRANCH_PAGES }}
+
+      - name: cd in the folder
+        run: cd ${{ env.DIR }}
+
+      - name: helm add repo
+        run: helm repo add ${{ env.REPO_NAME }} ${{ env.REPO_DEP }}
+
+      - name: helm update repo
+        run: helm dependency build
+
+      - name: helm template
+        run: helm template optionsviz . -f ${{ env.VALUES_FILE }} -n dev > generated-manifests.yaml
+
+      - name: Configure Git
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
-          git merge prod --no-edit
 
-      - name: cd in the folder
-        run: cd {{ env.DIR }}
-
-      - name: helm add repo
-        run: helm repo add {{ env.REPO_NAME }} {{ env.REPO_DEP }}
-      
-      - name: helm update repo
-        run: helm dependency build  
-      
-      - name: helm template 
-        run: helm template optionsviz . -f {{ $VALUES_FILE }} -n dev > generated-manifests.yaml     
-
-      - name: push to github-pages
-        run: git push origin ${{ env.BRANCH_PAGES }}
-      
-
+      - name: Commit and push
+        run: |
+          git add generated-manifests.yaml
+          git commit -m "Update generated manifests"
+          git push origin ${{ env.BRANCH_PAGES }}
