@@ -9,6 +9,7 @@ env:
   BRANCH_PAGES: github-pages
   BRANCH: prod
   REPO_DEP: https://raw.githubusercontent.com/MiletoCarmelo/DEVOPS_HELM_generic_react_frontend/github-pages
+  DIR: umbrella-optionsviz
   REPO_NAME: generic-react-frontend
   VALUES_FILE: values.dev.yaml
 
@@ -27,6 +28,9 @@ jobs:
 
       - name: merge to github-pages
         run: git merge ${{ env.BRANCH }} --no-edit
+
+      - name: cd in the folder
+        run: cd {{ env.DIR }}
 
       - name: helm add repo
         run: helm repo add {{ env.REPO_NAME }} {{ env.REPO_DEP }}
