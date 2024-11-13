@@ -1,11 +1,11 @@
 
-optionviz:  # Ajoutez ce niveau pour correspondre au nom du subchart
-  module: optionviz
+optionsviz:  # Ajoutez ce niveau pour correspondre au nom du subchart
+  module: optionsviz
   environment: prod
   replicas: 1
   containers:
-    image: ghcr.io/miletocarmelo/optionviz
-    name: optionviz
+    image: ghcr.io/miletocarmelo/optionsviz
+    name: optionsviz
     tags: latest
     ports:
       containerPort: 80 # Changed from 'http' to '80' for consistency
@@ -31,7 +31,7 @@ optionviz:  # Ajoutez ce niveau pour correspondre au nom du subchart
         kubernetes.io/ingress.class: nginx  # Added this common annotation
         nginx.ingress.kubernetes.io/rewrite-target: /$1  # Changed from pathRewrite
     spec:
-      path: /optionviz
+      path: /optionsviz
       pathType: Prefix
   configmap:
     enabled: false

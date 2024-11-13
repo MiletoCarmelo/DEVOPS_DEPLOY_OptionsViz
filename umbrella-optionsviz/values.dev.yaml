@@ -1,6 +1,6 @@
 optionsviz:
-  module: optionviz
-  name: optionviz
+  module: optionsviz
+  name: optionsviz
   environment: dev
   replicas: 1
   containers:

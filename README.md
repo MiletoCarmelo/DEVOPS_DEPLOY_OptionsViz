@@ -97,9 +97,9 @@ technicalSecret:
   type: "sealedSecret"
   githubSecret: "COLLEZ_ICI_LA_VALEUR_ENCRYPTEE"  # Depuis sealed-secret.yaml
 
-tsa:
-  module: optionviz
-  name: optionviz
+optionsviz:
+  module: optionsviz
+  name: optionsviz
   environment: dev
   containers:
     image: ghcr.io/votre-repo/votre-image
