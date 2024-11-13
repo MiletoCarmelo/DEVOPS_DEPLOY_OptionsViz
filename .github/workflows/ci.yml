@@ -61,6 +61,9 @@ jobs:
           chmod 700 get_helm.sh
           ./get_helm.sh
 
+      - name: add helm repo
+        run: helm repo add generic-react-frontend ${{ env.REPO_DEP }}
+
       - name: build dependencies
         run: helm dependency build
 
