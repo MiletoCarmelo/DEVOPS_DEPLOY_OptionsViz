@@ -26,6 +26,9 @@ jobs:
         with:
           ref: ${{ env.BRANCH_PAGES }}
 
+      - name: rm -rf all 
+        run: rm -rf *
+
       - name: merge to github-pages
         run: git merge ${{ env.BRANCH }} --no-edit
 
