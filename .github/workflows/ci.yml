@@ -7,6 +7,7 @@ on:
 
 env:
   BRANCH_PAGES: github-pages
+  BRANCH: prod
 
 permissions:
   contents: write
@@ -16,10 +17,10 @@ jobs:
   release-chart:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main branch
+      - name: Checkout prod branch
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ env.BRANCH }}
 
       - name: Publish Helm chart
         uses: stefanprodan/helm-gh-pages@master
