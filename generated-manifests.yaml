@@ -22,13 +22,14 @@ kind: Service
 metadata:
   name: optionsviz-dev-service
   labels:
-  app.kubernetes.io/component: frontend-react-optionsviz-dev
-  app.kubernetes.io/instance: optionsviz
-  app.kubernetes.io/managed-by: Helm
-  app.kubernetes.io/name: optionsviz-dev
-  app.kubernetes.io/version: "1.0.0"
-  helm.sh/chart: optionsviz-0.1.0
-  app.kubernetes.io/version: 1.0.0
+    app.kubernetes.io/component: frontend-react-optionsviz-dev
+    app.kubernetes.io/instance: optionsviz
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: optionsviz-dev
+    app.kubernetes.io/version: "1.0.0"
+    helm.sh/chart: optionsviz-0.1.0
+    app.kubernetes.io/version: 1.0.0
+    module: optionsviz
 spec:
   type: ClusterIP
   ports:
@@ -53,7 +54,7 @@ metadata:
     app.kubernetes.io/version: 1.0.0
     module: optionsviz
   name: optionsviz-dev-deployment
-  namespace: 
+  namespace: dev
 spec:
   replicas: 1
   selector:
