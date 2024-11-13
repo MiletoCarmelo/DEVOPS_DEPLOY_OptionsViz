@@ -23,7 +23,7 @@ jobs:
       - name: Checkout prod branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ env.BRANCH_PAGES }}
+          ref: ${{ env.BRANCH }}
 
       - name: Publish Helm chart
         uses: stefanprodan/helm-gh-pages@master
