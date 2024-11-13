@@ -70,11 +70,6 @@ jobs:
       - name: helm template
         run: helm template optionsviz . -f ${{ env.VALUES_FILE }} -n dev > generated-manifests.yaml
 
-      - name: Remove all files except generated-manifests.yaml
-        run: |
-          find . -type f ! -name 'generated-manifests.yaml' -delete
-          find . -type d ! -name '.' ! -name '.git' -exec rm -rf {} +
-
       - name: Configure Git
         run: |
           git config user.name "${{ github.actor }}"
