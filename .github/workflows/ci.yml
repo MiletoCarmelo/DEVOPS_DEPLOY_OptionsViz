@@ -52,6 +52,12 @@ jobs:
       - name: cd in the folder
         run: cd ${{ env.FILE }}
 
+      - name: install helm command
+        run: |
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          chmod 700 get_helm.sh
+          ./get_helm.sh
+
       - name: helm add repo
         run: helm repo add ${{ env.REPO_NAME }} ${{ env.REPO_DEP }}
 
