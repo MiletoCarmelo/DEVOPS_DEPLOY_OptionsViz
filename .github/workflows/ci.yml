@@ -8,7 +8,7 @@ on:
 env:
   BRANCH_PAGES: github-pages
   BRANCH: prod
-  CHART_DIR: ../umbrella-optionsviz/
+  CHART_DIR: umbrella-optionsviz
 
 permissions:
   contents: write
@@ -27,8 +27,7 @@ jobs:
         uses: stefanprodan/helm-gh-pages@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          charts_dir: ../
-          target_dir: ${{ env.CHART_DIR }}
+          charts_dir: ${{ env.CHART_DIR }}
           branch: ${{ env.BRANCH_PAGES }}
           charts_url: https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH_PAGES }}
           linting: false
