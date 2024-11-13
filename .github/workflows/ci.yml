@@ -50,7 +50,7 @@ jobs:
         run: tar -xvf ${{ env.FILE }}-${{ env.VERSION }}.tgz
 
       - name: cd in the folder
-        run: cd ${{ env.FILE }}-${{ env.VERSION }}
+        run: cd ${{ env.FILE }}
 
       - name: helm add repo
         run: helm repo add ${{ env.REPO_NAME }} ${{ env.REPO_DEP }}
