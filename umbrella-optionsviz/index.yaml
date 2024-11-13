@@ -3,17 +3,17 @@ entries:
   tradings-trategy-analysis:
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2024-11-13T16:17:39.74021261Z"
+    created: "2024-11-13T16:17:51.115948383Z"
     dependencies:
     - alias: optionsviz
       name: generic-react-frontend
       repository: https://raw.githubusercontent.com/MiletoCarmelo/DEVOPS_HELM_generic_react_frontend/github-pages
       version: 0.1.0
     description: A Helm chart for TradingStrategyAnalysis frontend application
-    digest: a145035a1df8db21df4216dbb022d82138880d1a72eeebd9b6e95df02ea822b5
+    digest: 4cf7aa3570526e59fe85c0b1e8ac9db52f82850272ab7977db3e7ddb124eff6b
     name: tradings-trategy-analysis
     type: application
     urls:
     - https://raw.githubusercontent.com/MiletoCarmelo/DEVOPS_DEPLOY_OptionsViz/github-pages/umbrella-optionsviz/tradings-trategy-analysis-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-13T16:17:39.739564537Z"
+generated: "2024-11-13T16:17:51.115050517Z"
