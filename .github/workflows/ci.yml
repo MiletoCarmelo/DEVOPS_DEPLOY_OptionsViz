@@ -75,8 +75,13 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
+      - name: remove all except generated-manifests.yaml
+        run: rm -rf *
+        
       - name: Commit and push
         run: |
           git add generated-manifests.yaml
           git commit -m "Update generated manifests"
           git push origin ${{ env.BRANCH_PAGES }}
+
+      
