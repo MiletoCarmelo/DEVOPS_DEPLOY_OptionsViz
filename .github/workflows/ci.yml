@@ -29,8 +29,15 @@ jobs:
       - name: rm -rf all 
         run: rm -rf *
 
-      - name: merge to github-pages
-        run: git merge ${{ env.BRANCH }} --no-edit
+      - name: Fetch prod branch
+        run: |
+          git fetch origin prod:prod
+    
+      - name: Merge prod
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git merge prod --no-edit
 
       - name: cd in the folder
         run: cd {{ env.DIR }}
