@@ -1,0 +1,79 @@
+name: CI
+on:
+  push:
+    branches:
+      - prod
+
+env:
+  BRANCH_PAGES: github-pages
+  BRANCH: prod
+  REPO_DEP: https://raw.githubusercontent.com/MiletoCarmelo/DEVOPS_HELM_generic_react_frontend/github-pages
+  FILE: optionsviz
+  VERSION: 0.1.0
+  REPO_NAME: generic-react-frontend
+  VALUES_FILE: values.dev.yaml
+
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  release-chart:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout prod branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BRANCH }}
+
+      - name: Publish Helm chart
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          charts_dir: .  # Point vers le répertoire racine
+          charts_url: https://raw.githubusercontent.com/${{ github.repository }}/${{ env.BRANCH_PAGES }}
+          branch: ${{ env.BRANCH_PAGES }}
+          target_dir: .
+          linting: false
+
+  generate-manifests:
+    needs: [release-chart]  # Spécifie que ce job doit attendre que release-chart soit terminé
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout prod branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.BRANCH_PAGES }}
+
+      - name: unzip tgz file
+        run: tar -xvf ${{ env.FILE }}-${{ env.VERSION }}.tgz
+
+      - name: mv all from  
+        run: mv ${{ env.FILE }}/* . 
+
+      - name: rm *.tgz
+        run: rm -rf ${{ env.FILE }}-${{ env.VERSION }}.tgz
+
+      - name: install helm command
+        run: |
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          chmod 700 get_helm.sh
+          ./get_helm.sh
+
+      - name: build dependencies
+        run: helm dependency build
+
+      - name: helm template
+        run: helm template optionsviz . -f ${{ env.VALUES_FILE }} -n dev > generated-manifests.yaml
+
+      - name: Configure Git
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Commit and push
+        run: |
+          git add generated-manifests.yaml
+          git commit -m "Update generated manifests"
+          git push origin ${{ env.BRANCH_PAGES }}
