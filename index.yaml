@@ -3,14 +3,14 @@ entries:
   optionsviz:
   - apiVersion: v2
     appVersion: 1.1.0
-    created: "2024-11-13T16:49:43.071965298Z"
+    created: "2024-11-13T16:53:13.680904658Z"
     dependencies:
     - alias: optionsviz
       name: generic-react-frontend
       repository: https://raw.githubusercontent.com/MiletoCarmelo/DEVOPS_HELM_generic_react_frontend/github-pages
       version: 0.1.0
     description: A Helm chart for TradingStrategyAnalysis frontend application
-    digest: 1e9470badf357e2cc4123bea8784be49e91777ceecc93df09039bf13ed051632
+    digest: eddbc490bbeb4f4a0a4edb62042444e7775efbc5a6270c305239372eff4f3830
     name: optionsviz
     type: application
     urls:
@@ -32,4 +32,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/MiletoCarmelo/DEVOPS_DEPLOY_OptionsViz/github-pages/tradings-trategy-analysis-0.1.0.tgz
     version: 0.1.0
-generated: "2024-11-13T16:49:43.070593021Z"
+generated: "2024-11-13T16:53:13.679531275Z"
